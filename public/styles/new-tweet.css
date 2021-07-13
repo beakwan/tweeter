@@ -16,7 +16,7 @@ form {
   border: #f4f1ec;
   border-bottom: 5px solid #545149;
   background-color: #f4f1ec;
-  height: 30px;
+  height: 60px;
   margin: 5px;
 }
 
@@ -36,4 +36,8 @@ button {
 
 .counter {
   font-family: 'Bungee', sans-serif;
+}
+
+.over-limit {
+  color: red;
 }

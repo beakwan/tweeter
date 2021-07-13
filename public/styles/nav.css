@@ -11,12 +11,12 @@ nav {
   z-index: 1;
 }
 
-span {
+nav span {
   font-family: 'Bungee', sans-serif;
 
 }
 
-div {
+nav div {
   font-size: 25px;
   display: flex;
   flex-direction: column;
@@ -24,6 +24,6 @@ div {
   align-items: center;
 }
 
-i {
+nav div i {
   color: rgb(228, 30, 30);
 }

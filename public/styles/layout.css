@@ -31,6 +31,9 @@ body {
  main {
    display: flex;
    width: 90%;
+   flex-direction: column;
   align-self: center;
   justify-content: center;
  }
+
+

@@ -33,13 +33,14 @@ const data = [
 
 
 $(document).ready(function() {
-
+  //For each tweet object, render and append tweet element
   const renderTweets = function(tweets) {
     tweets.forEach(function(tweet) {
       $("#tweets-container").append(createTweetElement(tweet))
     });
   }
 
+  //Create dynamic tweet element using DB
   const createTweetElement = function(tweetObj) {
     //Grab data from tweet DB
     const {user, content, created_at} = tweetObj;
@@ -66,8 +67,18 @@ $(document).ready(function() {
 
     return $tweet;
   }
-
+  
   renderTweets(data);
+
+
+  //Event handler for new tweets
+  $("form").submit(function(event) {
+    event.preventDefault();
+    const serializedData = $(this).serialize();
+    $.post('/tweets', serializedData);
+  })
+
+  
 })
 
 

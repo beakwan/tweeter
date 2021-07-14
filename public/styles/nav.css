@@ -9,6 +9,9 @@ nav {
   align-items: flex-end;
   justify-content: space-between;
   z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 nav span {
@@ -27,3 +30,4 @@ nav div {
 nav div i {
   color: rgb(228, 30, 30);
 }
+

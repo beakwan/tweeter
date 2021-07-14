@@ -5,41 +5,16 @@
  */
 
 
-// Fake data taken from initial-tweets.json
-// const data = [
-//   {
-//     "user": {
-//       "name": "Newton",
-//       "avatars": "https://i.imgur.com/73hZDYK.png"
-//       ,
-//       "handle": "@SirIsaac"
-//     },
-//     "content": {
-//       "text": "If I have seen further it is by standing on the shoulders of giants"
-//     },
-//     "created_at": 1461116232227
-//   },
-//   {
-//     "user": {
-//       "name": "Descartes",
-//       "avatars": "https://i.imgur.com/nlhLi3I.png",
-//       "handle": "@rd" },
-//     "content": {
-//       "text": "Je pense , donc je suis"
-//     },
-//     "created_at": 1461113959088
-//   }
-// ]
-
-
 $(document).ready(function() {
   
+
   //For each tweet object, render and append tweet element
   const renderTweets = function(tweets) {
     tweets.forEach(function(tweet) {
-      $("#tweets-container").append(createTweetElement(tweet))
+      $("#tweets-container").prepend(createTweetElement(tweet))
     });
   }
+
 
   //Create dynamic tweet element using DB
   const createTweetElement = function(tweetObj) {
@@ -70,16 +45,6 @@ $(document).ready(function() {
   }
   
 
-
-
-  //Event handler for new tweets
-  $("form").submit(function(event) {
-    event.preventDefault();
-    const serializedData = $(this).serialize();
-    $.post('/tweets', serializedData);
-  })
-
-
   //Function to request and load array of tweets
   const loadTweets = function() {
     $.ajax('/tweets', {method: 'GET'})
@@ -87,8 +52,30 @@ $(document).ready(function() {
       renderTweets(data);
     });
   }
-
+ 
+  //Call to load past tweets onto page
   loadTweets();
+
+  //Event handler for new tweets
+  $("form").submit(function(event) {
+    event.preventDefault();
+    const serializedData = $(this).serialize();
+    const charCount = $(this.text).val().length;
+    const formText = $(this.text);
+  
+    //Form validation to ensure tweet text exists and doesn't exceed character limit
+    if (charCount === 0) {
+      return alert("Please enter a tweet. We want to hear you hum.");
+    } else if (charCount > 140) {
+      return alert("Exceeded character count. Maybe try a softer hum.");
+    }
+
+    $.post('/tweets', serializedData)
+    
+  })
+
+
+  
   
 
 })

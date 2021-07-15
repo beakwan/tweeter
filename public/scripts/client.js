@@ -64,35 +64,44 @@ $(document).ready(function() {
   loadTweets();
 
 
+  //Variables for error messages
+  const $error = document.getElementsByClassName("error");
+  const $errorMessage = document.getElementsByClassName("error-message");
+
+  //Function for error animation
+  const showError = function(message) {
+    $($error).slideDown('fast', function() {
+      $($errorMessage).text(message);
+    });
+  }
+
   //Event handler for new tweets
   $("form").submit(function(event) {
     event.preventDefault();
     
-    const serializedData = $(this).serialize();
-    const charCount = $(this.text).val().length;
-    const formText = $(this.text);
-    const counter = $(this.counter);
+    const $serializedData = $(this).serialize();
+    const $charCount = $(this.text).val().length;
+    const $formText = $(this.text);
+    const $counter = $(this.counter);
+   
     
     //Form validation to ensure tweet text exists and doesn't exceed character limit
-    if (charCount === 0) {
-      return alert("Please enter a tweet. We want to hear you hum.");
-    } else if (charCount > 140) {
-      return alert("Exceeded character count. Maybe try a softer hum.");
+    if ($charCount === 0) {
+      return showError("Please enter a tweet. We want to hear you hum!");
+    } else if ($charCount > 140) {
+      return showError("Too many characters! Try humming a little softer.");
     } 
      
     //Post new tweet and clear form
-      $.post('/tweets', serializedData)
+      $.post('/tweets', $serializedData)
       .then(function(data) {
         loadTweets(data);
-        $(formText).val('');
-        $(counter).val(140);
+        $($error).slideUp('fast');
+        $($formText).val('');
+        $($counter).val(140);
       });
-    
-
-  })
-
-
   
+  })
   
 
 })

@@ -1,10 +1,10 @@
 section.new-tweet {
+  align-items: stretch;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  width: 100%;
   justify-content: center;
   margin: 10px;
+  width: 100%;
 }
 
 form {
@@ -13,10 +13,25 @@ form {
   
 }
 
+form div.error {
+  align-items: center;
+  border: 5px solid red;
+  color: red;
+  display: none;
+  font-size: 1.2em;
+  height: 55px;
+  margin: 10px;
+  padding-left: 0.8em;
+}
+
+form p.error-message {
+  margin: 5px;
+}
+
 form #tweet-text {
+  background-color: #f4f1ec;
   border: none;
   border-bottom: 5px solid #545149;
-  background-color: #f4f1ec;
   height: 60px;
   margin-bottom: 15px;
   margin-top: 5px;
@@ -31,9 +46,9 @@ div.tweet-footer {
 
 
 form button {
-  font-family: 'Bungee', sans-serif;
   background-color: #4056A1;
   color: white;
+  font-family: 'Bungee', sans-serif;
 }
 
 .counter {

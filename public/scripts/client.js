@@ -56,22 +56,31 @@ $(document).ready(function() {
   //Call to load past tweets onto page
   loadTweets();
 
+  
   //Event handler for new tweets
   $("form").submit(function(event) {
     event.preventDefault();
     const serializedData = $(this).serialize();
     const charCount = $(this.text).val().length;
     const formText = $(this.text);
-  
+    const counter = $(this.counter);
+    
     //Form validation to ensure tweet text exists and doesn't exceed character limit
     if (charCount === 0) {
       return alert("Please enter a tweet. We want to hear you hum.");
     } else if (charCount > 140) {
       return alert("Exceeded character count. Maybe try a softer hum.");
-    }
-
-    $.post('/tweets', serializedData)
+    } 
+     
+    //Post new tweet and clear form
+      $.post('/tweets', serializedData)
+      .then(function(data) {
+        loadTweets(data[-1]);
+        $(formText).val('');
+        $(counter).val(140);
+      });
     
+
   })
 
 

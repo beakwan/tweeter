@@ -7,8 +7,15 @@
 
 $(document).ready(function() {
   
+  //Use escape function to prevent vulnerabilities from XSS
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
-  //For each tweet object, render and append tweet element
+
+  //For each tweet object, render and prepend tweet element
   const renderTweets = function(tweets) {
     tweets.forEach(function(tweet) {
       $("#tweets-container").prepend(createTweetElement(tweet))
@@ -30,7 +37,7 @@ $(document).ready(function() {
         </div>
         <p class="username">${user.handle}</p>
       </header>
-      <div class="text">${content.text}</div>
+      <div class="text">${escape(content.text)}</div>
       <footer>
         <p class="days">${timeago.format(created_at)}</p>
         <div class="tweet-icons">
@@ -56,10 +63,11 @@ $(document).ready(function() {
   //Call to load past tweets onto page
   loadTweets();
 
-  
+
   //Event handler for new tweets
   $("form").submit(function(event) {
     event.preventDefault();
+    
     const serializedData = $(this).serialize();
     const charCount = $(this.text).val().length;
     const formText = $(this.text);
@@ -75,7 +83,7 @@ $(document).ready(function() {
     //Post new tweet and clear form
       $.post('/tweets', serializedData)
       .then(function(data) {
-        loadTweets(data[-1]);
+        loadTweets(data);
         $(formText).val('');
         $(counter).val(140);
       });

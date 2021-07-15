@@ -12,7 +12,7 @@ $(document).ready(function() {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
-  };
+  }
 
 
   //For each tweet object, render and prepend tweet element
@@ -59,9 +59,6 @@ $(document).ready(function() {
       renderTweets(data);
     });
   }
- 
-  //Call to load past tweets onto page
-  loadTweets();
 
 
   //Variables for error messages
@@ -74,6 +71,7 @@ $(document).ready(function() {
       $($errorMessage).text(message);
     });
   }
+
 
   //Event handler for new tweets
   $("form").submit(function(event) {
@@ -94,8 +92,8 @@ $(document).ready(function() {
      
     //Post new tweet and clear form
       $.post('/tweets', $serializedData)
-      .then(function(data) {
-        loadTweets(data);
+      .then(function() {
+        loadTweets();
         $($error).slideUp('fast');
         $($formText).val('');
         $($counter).val(140);
@@ -103,6 +101,9 @@ $(document).ready(function() {
   
   })
   
+
+  //Call to load past tweets onto page
+  loadTweets();
 
 })
 

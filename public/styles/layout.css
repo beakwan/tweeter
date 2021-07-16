@@ -36,4 +36,27 @@ body {
    width: 90%;
  }
 
+ /* Media inquiry for different screen sizes */
+ @media screen and (min-width: 800px) {
+   body {
+     flex-direction: row;
+   }
+
+   body nav {
+    background-color: #4056A1;
+    background-image: none;
+    height: 120px;
+   }
+
+   header.page-header {
+    margin-right: 15px;
+    margin-top: 200px;
+    width: 30%;
+   }
+
+   main.container {
+     margin: 150px 25px;
+     width: 60%;
+   }
+ }
 

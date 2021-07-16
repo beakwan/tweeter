@@ -17,6 +17,7 @@ $(document).ready(function() {
 
   //For each tweet object, render and prepend tweet element
   const renderTweets = function(tweets) {
+    $("#tweets-container").empty();
     tweets.forEach(function(tweet) {
       $("#tweets-container").prepend(createTweetElement(tweet))
     });
@@ -33,9 +34,9 @@ $(document).ready(function() {
       <header>
         <div>
           <img src="${user.avatars}"> 
-          <p>${user.name}</p>
+          <p>${escape(user.name)}</p>
         </div>
-        <p class="username">${user.handle}</p>
+        <p class="username">${escape(user.handle)}</p>
       </header>
       <div class="text">${escape(content.text)}</div>
       <footer>
@@ -54,7 +55,7 @@ $(document).ready(function() {
 
   //Function to request and load array of tweets
   const loadTweets = function() {
-    $.ajax('/tweets', {method: 'GET'})
+    $.get('/tweets')
     .then(function(data) {
       renderTweets(data);
     });
@@ -84,7 +85,7 @@ $(document).ready(function() {
    
     
     //Form validation to ensure tweet text exists and doesn't exceed character limit
-    if ($charCount === 0) {
+    if ($charCount === 0 || $formText === null) {
       return showError("Please enter a tweet. We want to hear you hum!");
     } else if ($charCount > 140) {
       return showError("Too many characters! Try humming a little softer.");

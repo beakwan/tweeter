@@ -1,16 +1,17 @@
 nav {
-  height: 120px;
-  background-color: #4056A1;
+  align-items: flex-end;
+  background-color: #d3840c;
+  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
   color: #FFFF;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  z-index: 1;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 }
 
 nav span {
@@ -19,10 +20,10 @@ nav span {
 }
 
 nav div {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
 }
 
 nav div p {

@@ -1,10 +1,11 @@
 .page-header {
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #d3840c;
-background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
-margin-top: 120px;
+  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: center;
+  margin-top: 100px;
 }
+
